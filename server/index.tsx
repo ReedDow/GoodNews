@@ -5,7 +5,7 @@ const
     massive = require('massive'),
     session = require('express-session'),
     authCtrl = require('./controllers/authController'),
-    // mainCtrl = require('./controllers/mainController'),
+    abilityCtrl = require('./controllers/abilityController'),
     // emailCtrl = require('./controllers/emailController'),
     path = require('path'),
     
@@ -36,10 +36,10 @@ app.post('/api/login', authCtrl.login);
 app.get('/api/logout', authCtrl.logout);
 app.get('/api/checkuser', authCtrl.checkuser);
 
-// //post endpoints
-// app.post('/api/post', mainCtrl.createPost);
-// app.get('/api/posts/:id', mainCtrl.getUserPosts);
-// app.delete('/api/post/:id', mainCtrl.deletePost);
+// //ability endpoints
+app.post('/api/ability', abilityCtrl.addAbility);
+app.get('/api/abilities/:id', abilityCtrl.getUserPosts);
+app.delete('/api/ability/:id', abilityCtrl.deletePost);
 
 // //user endpoints
 // app.put('/api/user/:id', mainCtrl.updateUsername);

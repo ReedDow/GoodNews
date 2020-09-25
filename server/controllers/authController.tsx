@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
         let salt = bcrypt.genSaltSync(10),
             hash = bcrypt.hashSync(password, salt);
 
-        const newUser = await db.users.register_user({username, email, password: hash});
+        const newUser = await db.users.register_user({username, password: hash});
         req.session.user = newUser[0];
         res.status(201).send(req.session.user);
     },

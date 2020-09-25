@@ -1,7 +1,9 @@
 insert into ability (
     user_id,
-    ability_content
+    ability_content,
+    rating
 ) values (
     $1,
-    $2
+    $2,
+    $3
 );
