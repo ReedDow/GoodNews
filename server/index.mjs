@@ -1,12 +1,11 @@
-require('dotenv').config();
+
 
 const 
     express = require('express'),
     massive = require('massive'),
     session = require('express-session'),
-    authCtrl = require('./controllers/authController'),
-    abilityCtrl = require('./controllers/abilityController'),
-    // emailCtrl = require('./controllers/emailController'),
+    authCtrl = require('./controllers/authController.mjs'),
+    abilityCtrl = require('./controllers/abilityController.mjs'),
     path = require('path'),
     
     {SERVER_PORT,CONNECTION_STRING,SESSION_SECRET} = process.env,
@@ -14,6 +13,7 @@ const
     app = express();
 
 app.use(express.json());
+require('dotenv').config();
 
 app.use(session({
     resave: false,
@@ -25,7 +25,7 @@ app.use(session({
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {rejectUnauthorized: false}
-}).then((db: any) => {
+}).then(db => {
     app.set('db', db);
     console.log('db connected');
 });
@@ -38,8 +38,8 @@ app.get('/api/checkuser', authCtrl.checkuser);
 
 // //ability endpoints
 app.post('/api/ability', abilityCtrl.addAbility);
-app.get('/api/abilities/:id', abilityCtrl.getUserPosts);
-app.delete('/api/ability/:id', abilityCtrl.deletePost);
+app.get('/api/abilities/:id', abilityCtrl.getAbility);
+app.delete('/api/ability/:id', abilityCtrl.deleteAbility);
 
 // //user endpoints
 // app.put('/api/user/:id', mainCtrl.updateUsername);
